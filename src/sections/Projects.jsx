@@ -4,9 +4,57 @@ import { Suspense, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Center, OrbitControls } from '@react-three/drei';
 
-import { myProjects } from '../constants/index.js';
 import CanvasLoader from '../components/Loading.jsx';
 import DemoComputer from '../components/DemoComputer.jsx';
+
+// Updated projects: Flipkart Clone, Netflix Clone, Figma Landing Pages
+const myProjects = [
+  {
+    title: 'Flipkart Clone',
+    desc: 'A full-stack e-commerce platform inspired by Flipkart, featuring product listings, authentication, and a cart system.',
+    subdesc: 'Built with React, Redux, Node.js, Express, and MongoDB.',
+    tags: [
+      { name: 'React', path: '/assets/react.svg' },
+      { name: 'Redux', path: '/assets/redux.svg' },
+      { name: 'MongoDB', path: '/assets/mongodb.svg' },
+    ],
+    spotlight: '/assets/flipkart-preview.png',
+    logo: '/assets/flipkart-logo.png',
+    logoStyle: { backgroundColor: '#2874f0' },
+    href: 'https://flipkart-clone.example.com',
+    texture: '/assets/flipkart-texture.jpg',
+  },
+  {
+    title: 'Netflix Clone',
+    desc: 'A video streaming web app that mimics Netflix UI with authentication and API-based movie listings.',
+    subdesc: 'Developed using React, Firebase Authentication, and TMDB API.',
+    tags: [
+      { name: 'React', path: '/assets/react.svg' },
+      { name: 'Firebase', path: '/assets/firebase.svg' },
+      { name: 'TMDB API', path: '/assets/api.svg' },
+    ],
+    spotlight: '/assets/netflix-preview.png',
+    logo: '/assets/netflix-logo.png',
+    logoStyle: { backgroundColor: '#E50914' },
+    href: 'https://netflix-clone.example.com',
+    texture: '/assets/netflix-texture.jpg',
+  },
+  {
+    title: 'Figma Landing Pages',
+    desc: 'Designed and developed responsive landing pages from Figma mockups.',
+    subdesc: 'Converted high-fidelity Figma designs into pixel-perfect Tailwind CSS and React components.',
+    tags: [
+      { name: 'Figma', path: '/assets/figma.svg' },
+      { name: 'Tailwind CSS', path: '/assets/tailwind.svg' },
+      { name: 'React', path: '/assets/react.svg' },
+    ],
+    spotlight: '/assets/figma-preview.png',
+    logo: '/assets/figma-logo.png',
+    logoStyle: { backgroundColor: '#0ACF83' },
+    href: 'https://figma-landing-page.example.com',
+    texture: '/assets/figma-texture.jpg',
+  },
+];
 
 const projectCount = myProjects.length;
 
@@ -31,7 +79,7 @@ const Projects = () => {
 
   return (
     <section className="c-space my-20">
-      <p className="head-text">My Selected Work</p>
+      <p className="head-text">Projects I`ve Worked On</p>
 
       <div className="grid lg:grid-cols-2 grid-cols-1 mt-12 gap-5 w-full">
         <div className="flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-black-200">
@@ -64,7 +112,7 @@ const Projects = () => {
               href={currentProject.href}
               target="_blank"
               rel="noreferrer">
-              <p>Check Live Site</p>
+              <p>View Project</p>
               <img src="/assets/arrow-up.png" alt="arrow" className="w-3 h-3" />
             </a>
           </div>
