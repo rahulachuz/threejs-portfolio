@@ -22,16 +22,16 @@ const Contact = () => {
 
     emailjs
       .send(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+        'service_a0lz16g', // Your Service ID
+        'template_2xfihua', // Your Template ID
         {
           from_name: form.name,
-          to_name: 'JavaScript Mastery',
+          to_name: 'Rahul', // Your Name
           from_email: form.email,
-          to_email: 'sujata@jsmastery.pro',
+          to_email: 'rahulachuz68@gmail.com', // Your Email
           message: form.message,
         },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
+        'g3OazvUmprKTlvrI6', // Your Public Key
       )
       .then(
         () => {
