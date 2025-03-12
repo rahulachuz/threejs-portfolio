@@ -1,57 +1,59 @@
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { Suspense, useState } from 'react';
+import { Suspense, useRef, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Center, OrbitControls } from '@react-three/drei';
-
 import CanvasLoader from '../components/Loading.jsx';
 import DemoComputer from '../components/DemoComputer.jsx';
 
-// Updated projects: Flipkart Clone, Netflix Clone, Figma Landing Pages
+// 📌 Project Data
 const myProjects = [
   {
     title: 'Flipkart Clone',
     desc: 'A full-stack e-commerce platform inspired by Flipkart, featuring product listings, authentication, and a cart system.',
-    subdesc: 'Built with React, Redux, Node.js, Express, and MongoDB.',
+    subdesc: 'Built with React,Context Api, Tailwind CSS, JavaScript',
     tags: [
       { name: 'React', path: '/assets/react.svg' },
-      { name: 'Redux', path: '/assets/redux.svg' },
-      { name: 'MongoDB', path: '/assets/mongodb.svg' },
+      { name: 'Tailwind', path: '/assets/tailwindcss.png' },
+      { name: 'JavaScript', path: '/assets/javascript.png' },
     ],
-    spotlight: '/assets/flipkart-preview.png',
-    logo: '/assets/flipkart-logo.png',
-    logoStyle: { backgroundColor: '#2874f0' },
-    href: 'https://flipkart-clone.example.com',
+    spotlight: '/assets/spotlight1.png',
+    logo: '/assets/flipkart.png',
+    logoStyle: { backgroundColor: '#FEF3C7' },
+    href: 'https://cart-router.vercel.app',
     texture: '/assets/flipkart-texture.jpg',
   },
   {
-    title: 'Netflix Clone',
-    desc: 'A video streaming web app that mimics Netflix UI with authentication and API-based movie listings.',
-    subdesc: 'Developed using React, Firebase Authentication, and TMDB API.',
+    title: 'Netflix Clone Deployment - DevSecOps Project',
+    desc: 'Dockerized the application for scalable deployment. Integrated SonarQube & Trivy for CI/CD security checks. Automated CI/CD with Jenkins for efficient deployment. Installed Prometheus & Grafana for real-time monitoring. Set up a scalable EKS cluster with node groups. Utilized Helm charts for streamlined deployment & monitoring. Leveraged ArgoCD for declarative continuous delivery.',
+    subdesc: '',
     tags: [
-      { name: 'React', path: '/assets/react.svg' },
-      { name: 'Firebase', path: '/assets/firebase.svg' },
-      { name: 'TMDB API', path: '/assets/api.svg' },
+      { name: 'AWS', path: '/assets/aws.png' },
+      { name: 'Docker', path: '/assets/docker.png', logoStyle: { backgroundColor: '#000000' } },
+      { name: 'Jenkins', path: '/assets/jenkins.png' },
+      { name: 'Grafana', path: '/assets/grafana.png' },
     ],
-    spotlight: '/assets/netflix-preview.png',
-    logo: '/assets/netflix-logo.png',
-    logoStyle: { backgroundColor: '#E50914' },
-    href: 'https://netflix-clone.example.com',
+
+    spotlight: '/assets/spotlight2.png',
+    logo: '/assets/netflix.png',
+    logoStyle: { backgroundColor: '#000000' },
+    href: 'https://rahulachuz.neocities.org/trabook/',
     texture: '/assets/netflix-texture.jpg',
   },
   {
-    title: 'Figma Landing Pages',
-    desc: 'Designed and developed responsive landing pages from Figma mockups.',
-    subdesc: 'Converted high-fidelity Figma designs into pixel-perfect Tailwind CSS and React components.',
+    title: 'Educational Platform Landing Page - Built with HTML, CSS & Tailwind CSS',
+
+    desc: 'Designed and developed a responsive educational platform landing page using HTML, CSS, and Tailwind CSS. The page features a modern UI with seamless navigation, interactive course listings, and a structured layout optimized for user engagement. Ensured mobile responsiveness and accessibility for an enhanced learning experience.',
+    subdesc: '',
     tags: [
-      { name: 'Figma', path: '/assets/figma.svg' },
-      { name: 'Tailwind CSS', path: '/assets/tailwind.svg' },
-      { name: 'React', path: '/assets/react.svg' },
+      { name: 'HTML', path: '/assets/html.png' },
+      { name: 'CSS', path: '/assets/css.png' },
+      { name: 'Tailwind CSS', path: '/assets/tailwindcss.png' },
     ],
-    spotlight: '/assets/figma-preview.png',
-    logo: '/assets/figma-logo.png',
-    logoStyle: { backgroundColor: '#0ACF83' },
-    href: 'https://figma-landing-page.example.com',
+    spotlight: '/assets/figma.png',
+    logo: '/assets/figma.png',
+    logoStyle: { backgroundColor: '#000000' },
+    href: 'https://rahulachuz.neocities.org/askmeproject/',
     texture: '/assets/figma-texture.jpg',
   },
 ];
@@ -60,6 +62,7 @@ const projectCount = myProjects.length;
 
 const Projects = () => {
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
+  const textRef = useRef(null);
 
   const handleNavigation = (direction) => {
     setSelectedProjectIndex((prevIndex) => {
@@ -71,8 +74,18 @@ const Projects = () => {
     });
   };
 
+  useEffect(() => {
+    console.log('Current project:', myProjects[selectedProjectIndex]);
+  }, [selectedProjectIndex]);
+
   useGSAP(() => {
-    gsap.fromTo(`.animatedText`, { opacity: 0 }, { opacity: 1, duration: 1, stagger: 0.2, ease: 'power2.inOut' });
+    if (textRef.current) {
+      gsap.fromTo(
+        textRef.current.children,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 1, stagger: 0.2, ease: 'power2.out', delay: 0.3 },
+      );
+    }
   }, [selectedProjectIndex]);
 
   const currentProject = myProjects[selectedProjectIndex];
@@ -82,31 +95,44 @@ const Projects = () => {
       <p className="head-text">Projects I`ve Worked On</p>
 
       <div className="grid lg:grid-cols-2 grid-cols-1 mt-12 gap-5 w-full">
+        {/* Left Section: Project Info */}
         <div className="flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-black-200">
+          {/* Spotlight Image */}
           <div className="absolute top-0 right-0">
-            <img src={currentProject.spotlight} alt="spotlight" className="w-full h-96 object-cover rounded-xl" />
+            <img src="/assets/spotlight1.png" alt="spotlight" className="w-full h-96 object-cover rounded-xl" />
           </div>
 
+          {/* Logo */}
           <div className="p-3 backdrop-filter backdrop-blur-3xl w-fit rounded-lg" style={currentProject.logoStyle}>
-            <img className="w-10 h-10 shadow-sm" src={currentProject.logo} alt="logo" />
+            <img
+              className="w-10 h-10 shadow-sm"
+              src={currentProject.logo || 'https://via.placeholder.com/40'}
+              alt="logo"
+            />
           </div>
 
-          <div className="flex flex-col gap-5 text-white-600 my-5">
-            <p className="text-white text-2xl font-semibold animatedText">{currentProject.title}</p>
-
-            <p className="animatedText">{currentProject.desc}</p>
-            <p className="animatedText">{currentProject.subdesc}</p>
+          {/* Project Info */}
+          <div className="flex flex-col gap-5 text-white-600 my-5" ref={textRef}>
+            <p className="text-white text-2xl font-semibold">{currentProject.title}</p>
+            <p>{currentProject.desc}</p>
+            <p>{currentProject.subdesc}</p>
           </div>
 
+          {/* Tags */}
           <div className="flex items-center justify-between flex-wrap gap-5">
             <div className="flex items-center gap-3">
               {currentProject.tags.map((tag, index) => (
                 <div key={index} className="tech-logo">
-                  <img src={tag.path} alt={tag.name} />
+                  <img
+                    src={tag.path}
+                    alt={tag.name}
+                    onError={(e) => (e.target.src = 'https://via.placeholder.com/30')}
+                  />
                 </div>
               ))}
             </div>
 
+            {/* View Project Button */}
             <a
               className="flex items-center gap-2 cursor-pointer text-white-600"
               href={currentProject.href}
@@ -117,17 +143,18 @@ const Projects = () => {
             </a>
           </div>
 
+          {/* Navigation Buttons */}
           <div className="flex justify-between items-center mt-7">
             <button className="arrow-btn" onClick={() => handleNavigation('previous')}>
               <img src="/assets/left-arrow.png" alt="left arrow" />
             </button>
-
             <button className="arrow-btn" onClick={() => handleNavigation('next')}>
               <img src="/assets/right-arrow.png" alt="right arrow" className="w-4 h-4" />
             </button>
           </div>
         </div>
 
+        {/* Right Section: 3D Model */}
         <div className="border border-black-300 bg-black-200 rounded-lg h-96 md:h-full">
           <Canvas>
             <ambientLight intensity={Math.PI} />
