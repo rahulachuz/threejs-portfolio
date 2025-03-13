@@ -37,7 +37,7 @@ const myProjects = [
     spotlight: '/assets/spotlight2.png',
     logo: '/assets/netflix.png',
     logoStyle: { backgroundColor: '#000000' },
-    href: 'https://rahulachuz.neocities.org/trabook/',
+    href: '',
     texture: '/assets/netflix-texture.jpg',
   },
   {
@@ -54,6 +54,39 @@ const myProjects = [
     logo: '/assets/figma.png',
     logoStyle: { backgroundColor: '#000000' },
     href: 'https://rahulachuz.neocities.org/askmeproject/',
+    texture: '/assets/figma-texture.jpg',
+  },
+  {
+    title: 'Brainwave.io – Modern SaaS Landing Page',
+
+    desc: 'Brainwave.io is a sleek and responsive SaaS landing page built using HTML, CSS, Tailwind CSS, and React. This project features a modern UI with intuitive navigation, engaging content sections, and a fully responsive layout. It includes key sections such as project management, time tracking, testimonials, and pricing plans. Optimized for performance and usability, Brainwave.io provides a seamless experience for users looking to explore and engage with the platform',
+    subdesc: '',
+    tags: [
+      { name: 'React', path: '/assets/react.svg' },
+      { name: 'HTML', path: '/assets/html.png' },
+      { name: 'CSS', path: '/assets/css.png' },
+      { name: 'Tailwind CSS', path: '/assets/tailwindcss.png' },
+    ],
+    spotlight: '/assets/figma.png',
+    logo: '/assets/figma.png',
+    logoStyle: { backgroundColor: '#000000' },
+    href: 'https://trail-examples.vercel.app/#',
+    texture: '/assets/figma-texture.jpg',
+  },
+  {
+    title: 'Trabook – Travel Booking & Tour Management Platform',
+
+    desc: 'Trabook is a dynamic and user-friendly travel booking platform built using HTML, CSS, Tailwind CSS, and React. This project features an intuitive UI for seamless travel planning, including destination selection, tour packages, pricing comparisons, and exclusive travel offers. It provides a smooth user experience with interactive elements for trip booking, customer testimonials, and travel blogs. Designed for performance and responsiveness, Trabook ensures an engaging and hassle-free journey for travelers worldwide.',
+    subdesc: '',
+    tags: [
+      { name: 'HTML', path: '/assets/html.png' },
+      { name: 'CSS', path: '/assets/css.png' },
+      { name: 'Tailwind CSS', path: '/assets/tailwindcss.png' },
+    ],
+    spotlight: '/assets/figma.png',
+    logo: '/assets/figma.png',
+    logoStyle: { backgroundColor: '#000000' },
+    href: 'https://rahulachuz.neocities.org/trabook/',
     texture: '/assets/figma-texture.jpg',
   },
 ];
@@ -162,6 +195,7 @@ const Projects = () => {
             <Center>
               <Suspense fallback={<CanvasLoader />}>
                 <group scale={2} position={[0, -3, 0]} rotation={[0, -0.1, 0]}>
+                  {console.log('Rendering DemoComputer with texture:', currentProject.texture)}
                   <DemoComputer texture={currentProject.texture} />
                 </group>
               </Suspense>

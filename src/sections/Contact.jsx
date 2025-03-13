@@ -16,7 +16,6 @@ const Contact = () => {
     setForm({ ...form, [name]: value });
   };
 
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);

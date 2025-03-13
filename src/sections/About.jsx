@@ -23,7 +23,7 @@ const About = () => {
             <img src="assets/grid1.png" alt="grid-1" className="w-full sm:h-[276px] h-fit object-contain" />
 
             <div>
-              <p className="grid-headtext">Hi, I’m Rahul S</p>
+              <p className="grid-headtext ">Hi, I’m Rahul S</p>
               <p className="grid-subtext">
                 I am a fresher skilled in frontend and backend development, with hands-on experience in modern web
                 technologies.
